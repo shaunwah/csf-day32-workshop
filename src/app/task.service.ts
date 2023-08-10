@@ -8,12 +8,17 @@ export class TaskService {
   tasks: Task[] = [];
   id: number = 1;
 
-  getTasks(): Task[] {
-    return this.tasks;
-  }
+  getTasks(showCompletedOnly = false): Task[] {
+    const tasks = this.tasks
+      .sort((a, b) => {
+        let weight = (t: Task) => (t.priority == 'high') ? 3 : (t.priority == 'medium') ? 2 : 1;
+        return weight(b) - weight(a);
+      });
 
-  getTask(id: number) {
-    return this.tasks[this.tasks.findIndex(task => task.id == id)];
+    if (showCompletedOnly) {
+      return tasks.filter(task => task.isCompleted);
+    }
+    return tasks.filter(task => !task.isCompleted);
   }
 
   addTask(task: Task) {
