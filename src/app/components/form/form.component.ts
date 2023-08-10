@@ -24,14 +24,11 @@ export class FormComponent {
 
   onSubmit() {
     this.taskService.addTask(this.taskForm.value as Task)
-    console.log(this.tasks);
   }
 
   duePastDateValidator(control: AbstractControl) {
     const date = Date.parse(control.value);
     const dateNow = new Date().setUTCHours(0, 0, 0, 0);
-    console.log("date " + date);
-    console.log("dateNow " + dateNow);
     return date < dateNow ? {duePastDate: {value: control.value}} as ValidationErrors : null;
   }
 

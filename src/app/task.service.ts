@@ -6,24 +6,33 @@ import { Task } from './task';
 })
 export class TaskService {
   tasks: Task[] = [];
+  id: number = 1;
 
-  getTasks() {
+  getTasks(): Task[] {
     return this.tasks;
   }
 
   getTask(id: number) {
-    return this.tasks[id];
+    return this.tasks[this.tasks.findIndex(task => task.id == id)];
   }
 
   addTask(task: Task) {
-    this.tasks.push(task);
+    this.tasks.push({...task, id: this.id++, isCompleted: false});
+  }
+
+  completeTask(id: number) {
+    this.tasks[this.tasks.findIndex(task => task.id == id)].isCompleted = true;
+  }
+
+  incompleteTask(id: number) {
+    this.tasks[this.tasks.findIndex(task => task.id == id)].isCompleted = false;
   }
 
   removeTask(id: number) {
-    this.tasks.splice(id, 1);
+    this.tasks.splice(this.tasks.findIndex(task => task.id == id), 1);
   }
 
   editTask(id: number, task: Task) {
-    this.tasks[id] = task;
+    this.tasks[this.tasks.findIndex(task => task.id == id)] = task;
   }
 }

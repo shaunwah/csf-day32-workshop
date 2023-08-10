@@ -7,9 +7,22 @@ import {TaskService} from "../../task.service";
   styleUrls: ['./tasks.component.css']
 })
 export class TasksComponent {
-  tasks = this.taskService.getTasks();
-
   constructor(private taskService: TaskService) {
+  }
+
+  getTasks(showAll = false) {
+    if (showAll) {
+      return this.taskService.getTasks().filter(task => !task.isCompleted);
+    }
+    return this.taskService.getTasks().filter(task => task.isCompleted);
+  }
+
+  completeTask(id: number) {
+    this.taskService.completeTask(id);
+  }
+
+  incompleteTask(id: number) {
+    this.taskService.incompleteTask(id);
   }
 
   removeTask(id: number) {
