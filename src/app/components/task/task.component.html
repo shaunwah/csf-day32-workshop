@@ -1,8 +1,8 @@
-<div class="card mb-3">
-  <div class="card-body">
-    <h5 class="card-title"><ng-content select="[due]"></ng-content></h5>
-    <h6 class="card-subtitle mb-2 text-body-secondary"><ng-content select="[priority]"></ng-content></h6>
-    <p class="card-text"><ng-content select="[description]"></ng-content></p>
+<mat-card>
+  <mat-card-content>
+    <h3><ng-content select="[due]"></ng-content></h3>
+    <h4><ng-content select="[priority]"></ng-content></h4>
+    <p><ng-content select="[description]"></ng-content></p>
     <ng-content select="[actions]"></ng-content>
-  </div>
-</div>
+  </mat-card-content>
+</mat-card>

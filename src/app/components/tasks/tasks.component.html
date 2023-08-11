@@ -1,33 +1,30 @@
 <h2>Tasks</h2>
-<div class="row">
-  <div class="col-md-6">
-    <h3>Incomplete</h3> <!-- TODO move into own component -->
-    <div *ngIf="getTasks().length > 0; else noTasks">
-      <app-task *ngFor="let task of getTasks()">
-        <span due>{{ task.due | date }}</span>
-        <span priority>{{ task.priority | titlecase }}</span>
-        <span description>{{ task.description }}</span>
-        <span actions>
-          <a href="#" class="btn btn-success btn-sm me-1" (click)="completeTask(task.id)">Mark as Complete</a>
-          <a href="#" class="btn btn-danger btn-sm" (click)="removeTask(task.id)">Remove</a>
+<div>
+  <h2>Incomplete</h2> <!-- TODO move into own component -->
+  <div *ngIf="getTasks().length > 0; else noTasks">
+    <app-task *ngFor="let task of getTasks()">
+      <span due>{{ task.due | date }}</span>
+      <span priority>{{ task.priority | titlecase }}</span>
+      <span description>{{ task.description }}</span>
+      <span actions>
+          <a mat-flat-button color="primary" href="#" (click)="completeTask(task.id)">Mark as Complete</a>
+          <a mat-button color="warn" href="#" (click)="removeTask(task.id)">Remove</a>
         </span>
-      </app-task>
-    </div>
+    </app-task>
   </div>
-
-  <div class="col-md-6">
-    <h3>Complete</h3> <!-- TODO move into own component -->
-    <div *ngIf="getTasks(true).length > 0; else noTasks">
-      <app-task *ngFor="let task of getTasks(true)">
-        <span due>{{ task.due | date }}</span>
-        <span priority>{{ task.priority | titlecase }}</span>
-        <span description>{{ task.description }}</span>
-        <span actions>
-          <a href="#" class="btn btn-warning btn-sm me-1" (click)="incompleteTask(task.id)">Mark as Incomplete</a>
-          <a href="#" class="btn btn-danger btn-sm" (click)="removeTask(task.id)">Remove</a>
+</div>
+<div>
+  <h2>Complete</h2> <!-- TODO move into own component -->
+  <div *ngIf="getTasks(true).length > 0; else noTasks">
+    <app-task *ngFor="let task of getTasks(true)">
+      <span due>{{ task.due | date }}</span>
+      <span priority>{{ task.priority | titlecase }}</span>
+      <span description>{{ task.description }}</span>
+      <span actions>
+          <a mat-flat-button color="accent" href="#" (click)="incompleteTask(task.id)">Mark as Incomplete</a>
+          <a mat-button color="warn" href="#" (click)="removeTask(task.id)">Remove</a>
         </span>
-      </app-task>
-    </div>
+    </app-task>
   </div>
 </div>
 
