@@ -7,12 +7,17 @@ import { Task } from './task';
 export class TaskService {
   tasks: Task[] = [];
   id: number = 1;
+  weight = (t: Task): number => this.weights[t.priority];
+  weights: {[index: string]: number} = {
+    high: 3,
+    medium: 2,
+    low: 1
+  };
 
   getTasks(showCompletedOnly = false): Task[] {
     const tasks = this.tasks
       .sort((a, b) => {
-        let weight = (t: Task) => (t.priority == 'high') ? 3 : (t.priority == 'medium') ? 2 : 1;
-        return weight(b) - weight(a);
+        return this.weight(b) - this.weight(a);
       });
 
     if (showCompletedOnly) {
